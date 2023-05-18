@@ -236,6 +236,22 @@ class FiltersSet(object):
                     "[%s]" %
                     (",".join('"%s"' % val for val in c[next_arg_pos:]))
                 )
+            
+            elif cname == "address":
+                cmd = commands.get_command_instance("address", ifcontrol)
+                cmd.check_next_arg(
+                    "tag",
+                    c[1]
+                )
+                cmd.check_next_arg(
+                    "string",
+                    self.__quote_if_necessary(c[2])
+                )
+                cmd.check_next_arg(
+                    "string",
+                    self.__quote_if_necessary(c[3])
+                )
+
             else:
                 # header command fallback
                 if c[1].startswith(':not'):
